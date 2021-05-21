@@ -43,7 +43,7 @@
         </div>
 
         <div class="six wide field">
-          <input formControlName="vaccination_date" placeholder="YYYY-MM-DD HH:MM:SS">
+          <input formControlName="vaccination_date" type="date">
         </div>
 
         <div class="six wide field">
@@ -61,5 +61,5 @@
       {{ errors.vaccinations }}</div>
     </div>
 
-  <button type="submit" class="ui button" [disabled]="locationForm.invalid">Speichern</button>
+  <button type="submit" class="ui blue button" [disabled]="locationForm.invalid">Speichern</button>
 </form>

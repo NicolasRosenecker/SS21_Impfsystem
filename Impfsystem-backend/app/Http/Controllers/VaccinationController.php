@@ -47,8 +47,6 @@ class VaccinationController extends Controller
             return response()->json("saving vaccination failed: " . $e->getMessage(), 420);
 
         }
-
-
     }
 
     public function update (Request $request, int $id) : JsonResponse {

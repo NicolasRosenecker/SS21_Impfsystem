@@ -47,12 +47,9 @@ class LocationController extends Controller
 
 
     public function save (Request $request) : JsonResponse {
-
         DB::beginTransaction();
         try {
-
             $location = Location::create($request->all());
-
             DB::commit();
             return response()->json($location, 201);
         }

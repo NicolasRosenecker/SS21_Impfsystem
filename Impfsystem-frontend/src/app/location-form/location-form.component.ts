@@ -1,7 +1,6 @@
 import { ActivatedRoute, Router } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup, FormArray, Validators, FormControl
-} from "@angular/forms";
+import { FormBuilder, FormGroup, FormArray, Validators, FormControl } from "@angular/forms";
 import { LocationFormErrorMessages } from "./location-form-error-messages";
 import { LocationFactory } from "../shared/location-factory";
 import { ImpfsystemService } from "../shared/impfsystem.service";
@@ -88,12 +87,12 @@ export class LocationFormComponent implements OnInit {
     location.vaccinations = this.locationForm.value.vaccinations;
     if (this.isUpdatingLocation) {
       this.app.update(location).subscribe(res => {
+        console.log(res);
         this.router.navigate(['../../locations', location.postal_code], {
           relativeTo: this.route
         });
       });
     } else {
-
       this.app.create(location).subscribe(res => {
         this.location = LocationFactory.empty();
         this.locationForm.reset(LocationFactory.empty());
@@ -102,7 +101,6 @@ export class LocationFormComponent implements OnInit {
         });
       })
     }
-    console.log(location.vaccinations);
   }
 
   updateErrorMessages(){

@@ -12,6 +12,7 @@ class Vaccination extends Model
     use HasFactory;
 
     protected $fillable = [
+        'location_id',
         'vaccination_date',
         'vaccination_name',
         'max_participants',
@@ -27,6 +28,4 @@ class Vaccination extends Model
     }
 }
 
-/*TODO: Seite 10/20 Laravel 2 Script
-Seeder erstellen, Beziehungen überprüfen*/
 

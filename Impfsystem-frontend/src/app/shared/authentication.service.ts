@@ -27,11 +27,7 @@ interface Token {
     }
 
     public setLocalStorage(token: string){
-      console.log('Storing token');
-      console.log(jwt_decode(token));
       const decodedToken = jwt_decode(token) as Token;
-      console.log(decodedToken);
-      console.log(decodedToken.user.id);
       localStorage.setItem('token', token);
       localStorage.setItem('userId', decodedToken.user.id);
     }
@@ -45,14 +41,11 @@ interface Token {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       console.log('logged out');
-
     }
 
     public isLoggedIn(){
       if (localStorage.getItem('token')) {
         const token: string = localStorage.getItem('token') || '{}';
-        console.log(token);
-        console.log(jwt_decode(token));
         const decodedToken = jwt_decode(token) as Token;
         const expirationDate: Date = new Date(0);
         expirationDate.setUTCSeconds(decodedToken.exp);
@@ -65,7 +58,6 @@ interface Token {
       } else {
         return false;
       }
-
     }
 
     public isLoggedOut(){
