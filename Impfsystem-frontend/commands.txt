@@ -1,0 +1,12 @@
+ng serve
+ng serve --port=4280
+
+ng build
+ng build --prod
+
+ng g component
+ng g service
+ng g guard
+ng g interceptor
+ng g model
+

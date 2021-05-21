@@ -1,0 +1,42 @@
+
+<div class="ui grid" *ngIf="location">
+  <div class="sixteen wide column">
+    <h1 class="ui header">{{ location.location_name }} ({{ location.postal_code }}), {{ location.location_address }}</h1>
+    <div class="ui divider"></div>
+  </div>
+
+  <div class="sixteen wide column">
+    <h3 class="ui header">Beschreibung</h3>
+    <p>{{ location.location_description }}</p>
+  </div>
+
+  <div class="ui grid">
+    <div class="one column">
+      <h4 class="ui header">Verfügbare Impfungen</h4>
+      <span *ngFor="let vaccination of location?.vaccinations; last as l">
+            <b>{{ vaccination.vaccination_name }}</b>, verfügbar am {{ vaccination.vaccination_date }}<br/>
+            <span *ngIf="vaccination.max_participants === vaccination.participants">Impftermin bereits ausgebucht.</span>
+            <span *ngIf="vaccination.max_participants != vaccination.participants">
+            {{ vaccination.participants }} von {{ vaccination.max_participants }} Plätzen bereits belegt.<br/></span>
+          <span *ngIf="!l"><br/></span>
+      </span>
+    </div>
+  </div>
+</div>
+
+<br/>
+<button [routerLink]="'/locations'" class="ui blue button">Zurück zu den Locations</button>
+
+
+<button *ngIf="authService.isLoggedIn()" class="ui red labeled icon button" (click)="removeLocation()">
+  <i class="remove icon"></i> Location löschen
+</button>
+
+<button *ngIf="authService.isLoggedIn()" class="ui yellow labeled icon button" [routerLink]="['../../admin', location?.postal_code]">
+  <i class="write icon"></i> Ortschaft bearbeiten
+</button>
+
+
+
+
+

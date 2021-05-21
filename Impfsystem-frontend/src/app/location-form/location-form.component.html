@@ -1,0 +1,65 @@
+<h1>Formular für Ortschaften</h1>
+<form class="ui large form" [formGroup]="locationForm"
+      (ngSubmit)="submitForm()">
+  <input type="hidden" name="id">
+
+  <div class="field">
+    <label>Ortsname</label>
+    <input formControlName="location_name">
+    <div *ngIf="errors.location_name" class="ui negative message">
+      {{ errors.location_name}}
+    </div>
+  </div>
+
+  <div class="field" [class.disabled]="isUpdatingLocation">
+    <label>Postleitzahl</label>
+    <input formControlName="postal_code">
+    <div *ngIf="errors.postal_code" class="ui negative message">{{ errors.postal_code }}
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Addresse</label>
+    <input formControlName="location_address">
+    <div *ngIf="errors.location_address" class="ui negative message">
+      {{ errors.location_address}}
+    </div>
+  </div>
+
+  <div class="field">
+    <label>Beschreibung</label>
+    <textarea formControlName="location_description" rows="3"></textarea>
+  </div>
+
+  <div class="field">
+    <label>Impfungen</label>
+    <div formArrayName="vaccinations">
+
+      <div class="fields" *ngFor="let control of vaccinations?.controls; index as i; last as l" [formGroupName]="i">
+        <input type="hidden" name="id">
+
+        <div class="nine wide field">
+          <input formControlName="vaccination_name" placeholder="Name des Vakzins">
+        </div>
+
+        <div class="six wide field">
+          <input formControlName="vaccination_date" placeholder="YYYY-MM-DD HH:MM:SS">
+        </div>
+
+        <div class="six wide field">
+          <input formControlName="max_participants" type="number" placeholder="100">
+        </div>
+
+        <div class="one wide field" *ngIf="l">
+          <button (click)="addVaccinationControl()" class="ui large blue button"
+                  type="button">+</button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="errors.vaccinations" class="ui negative message">
+      {{ errors.vaccinations }}</div>
+    </div>
+
+  <button type="submit" class="ui button" [disabled]="locationForm.invalid">Speichern</button>
+</form>
