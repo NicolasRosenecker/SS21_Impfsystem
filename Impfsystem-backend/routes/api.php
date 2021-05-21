@@ -58,3 +58,21 @@ Route::post('user', [\App\Http\Controllers\UserController::class, 'save']);
 Route::put('user/{id}', [\App\Http\Controllers\UserController::class, 'update']);
 Route::delete('user/{id}', [\App\Http\Controllers\UserController::class, 'delete']);
 // ======================================
+
+// ======================================
+// Authentication
+// ======================================
+Route::post('auth/login', [\App\Http\Controllers\AuthController::class, 'login']);
+// ======================================
+
+// ======================================
+// Routes, welche Berechtigung benötigen
+// ======================================
+Route::group(['middleware' => ['api','cors', 'auth.jwt']], function(){
+    Route::post('location', [\App\Http\Controllers\LocationController::class, 'save']);
+    Route::put('location/{postal_code}', [\App\Http\Controllers\LocationController::class, 'update']);
+    Route::delete('location/{postal_code}', [\App\Http\Controllers\LocationController::class, 'delete']);
+    Route::post('auth/logout', [\App\Http\Controllers\AuthController::class, 'logout']);
+});
+
+// ======================================
