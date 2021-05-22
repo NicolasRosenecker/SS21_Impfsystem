@@ -23,7 +23,6 @@ interface Token {
 export class AuthenticationService {
 
   private api = 'http://impfsystem.s1810456030.student.kwmhgb.at/api/auth';
-  adminStatus: Object = false;
 
   constructor(private http: HttpClient) { }
 
@@ -47,7 +46,12 @@ export class AuthenticationService {
     } else{
       localStorage.setItem('is_admin', String(false));
     }
+    if(decodedToken.user.is_vaccinated){
+      localStorage.setItem('is_vaccinated', String(true));
 
+    } else{
+      localStorage.setItem('is_vaccinated', String(false));
+    }
   }
 
   logout(){
@@ -95,6 +99,14 @@ export class AuthenticationService {
 
   isAdmin() {
     return localStorage.getItem("is_admin") === "true";
+  }
+
+  isVaccinated() {
+    return localStorage.getItem("is_vaccinated") === "true";
+  }
+
+  getFirstName() {
+    return localStorage.getItem("firstname");
   }
 
 }

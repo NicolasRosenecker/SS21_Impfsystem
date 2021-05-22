@@ -1,0 +1,113 @@
+<div class="pusher">
+  <div class="ui inverted vertical masthead center aligned segment">
+
+    <div *ngIf="!authService.isLoggedIn()" class="ui text container">
+      <h1 class="ui inverted header">Willkommen im KWM Impfsystem!</h1>
+      <p>Gemeinsam zurück zur Normalität</p>
+      <div routerLink="../locations" class="ui medium primary button">Jetzt Impftermin suchen <i class="right arrow icon"></i></div>
+    </div>
+
+    <div *ngIf="authService.isLoggedIn()" class="ui text container">
+      <h1 class="ui inverted header">Willkommen im KWM Impfsystem, {{authService.getFirstName()}}!</h1>
+      <p>Gemeinsam zurück zur Normalität</p>
+      <br>
+      <div routerLink="../locations" class="ui medium primary button">Jetzt Impftermin suchen <i class="right arrow icon"></i></div>
+    </div>
+
+  </div>
+
+  <div class="ui vertical stripe segment">
+    <div class="ui middle aligned stackable grid container">
+      <div class="row">
+        <div class="eight wide column">
+          <h3 class="ui header">Einfache Anmeldung</h3>
+          <p>Das KWM Impfsystem ermöglicht Ihnen eine einfache und intuitive Möglichkeit, um sich für Impftermine in ganz Österreich zu registrieren. Planen Sie heute Ihre Impfung!</p>
+          <h3 class="ui header">Wozu impfen?</h3>
+          <p>Abstand halten und Maske tragen, Lüften – diese Maßnahmen sind ein wichtiger Baustein, um die Verbreitung von SARS-CoV-2 zu reduzieren. Die Impfung ist ein weiterer wichtiger Baustein. Sie hilft dem Immunsystem, wenn es mit SARS-CoV-2 in Kontakt kommt, den Erreger zu bekämpfen.</p>
+        </div>
+        <div class="six wide right floated column">
+          <img src="https://www.land-oberoesterreich.gv.at/Bilder/Raster/LK/AdobeStock_398634301_covid19_impfung_rdax_500x375_80.jpg" class="ui large bordered rounded image">
+        </div>
+      </div>
+    </div>
+    <br/>
+  </div>
+
+  <h4 class="ui horizontal header divider">
+    <p>Impfungen im Überblick</p>
+  </h4>
+  <div class="ui vertical stripe quote segment">
+    <div class="ui equal width stackable internally celled grid">
+      <div class="center aligned row">
+        <div class="column">
+          <h3>Biontech/Pfizer</h3>
+          <p><b>Bezeichnung: </b>BNTT62b2</p>
+          <p><b>Typ: </b>mRNA-Impfstoff</p>
+          <p><b>Wirksamkeit: </b>95 %</p>
+          <p><b>Dosiskosten: </b>12 €</p>
+        </div>
+        <div class="column">
+          <h3>Moderna</h3>
+          <p><b>Bezeichnung: </b>mRNA-1273</p>
+          <p><b>Typ: </b>mRNA-Impfstoff</p>
+          <p><b>Wirksamkeit: </b>94 %</p>
+          <p><b>Dosiskosten: </b>15 €</p>
+        </div>
+        <div class="column">
+          <h3>AstraZeneca</h3>
+          <p><b>Bezeichnung: </b>BNTT62b2</p>
+          <p><b>Typ: </b>Vektorviren-Impfstoff</p>
+          <p><b>Wirksamkeit: </b>62 % - 90 %</p>
+          <p><b>Dosiskosten: </b>1,78 €</p>
+        </div>
+        <div class="column">
+          <h3>Janssen</h3>
+          <p><b>Bezeichnung: </b>Ad26.COV2-S</p>
+          <p><b>Typ: </b>Vektorviren-Impfstoff</p>
+          <p><b>Wirksamkeit: </b>75 %</p>
+          <p><b>Dosiskosten: </b>10 €</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br>
+
+
+
+  <div class="ui vertical stripe segment">
+    <div class="ui text container">
+
+      <h4 class="ui horizontal header divider">
+        <p>Häufig gestellte Fragen</p>
+      </h4>
+
+      <h3 class="ui header">Wie werden die Impfstoffe verteilt?</h3>
+      <p>Ein zugelassener Impfstoff steht zu Beginn nicht automatisch überall und für jeden sofort zur Verfügung. Er muss erst hergestellt und verteilt werden. Zuständig für die Planung und Verteilung eines Impfstoffs sind das Bundesministerium für Gesundheit (BMG) und die Bundesländer. Das RKI ist nicht in den Einkauf und die Verteilung von Impfstoffen eingebunden. In ihrem gegenwärtigen Auftrag, die Impfempfehlung zu COVID-19 weiter zu entwickeln, hat die Ständige Impfkommission (STIKO) unter anderem jene Gruppen, deren Impfung Priorität hat, ermittelt.
+        Deutschland fördert aktiv den Aufbau von Herstellungskapazitäten für Impfstoffe in Deutschland und der EU. Dabei werden mit den Herstellern auch Verträge zur ausreichenden Versorgung der Bevölkerung in Deutschland und Europa mit potenziellen COVID-19-Impfstoffen geschlossen.</p>
+
+      <h3 class="ui header">Welche Nachbeobachtungszeit wird empfohlen?</h3>
+      <p>Im Allgemeinen wird eine Nachbeobachtungszeit nach der Impfung gegen COVID-19 von mindestens 15 Minuten empfohlen. Längere Nachbeobachtungszeiten von 15-30 Minuten sollten vorsichtshalber bei bestimmten Risikopersonen eingehalten werden, z. B. bei Personen mit Gerinnungshemmung oder einer Impfkomplikation in der Anamnese. Eine Impfkomplikation wird laut STIKO definiert als eine über das übliche Ausmaß einer Impfreaktion hinausgehende gesundheitliche Schädigung.</p>
+
+      <h3 class="ui header">Wer ist für die Bewertung und Überwachung der Impfstoffe zuständig?</h3>
+      <p>Für die Zulassung von Impfstoffen, d.h. die Bewertung der Qualität, Wirksamkeit und Sicherheit sowie die Pharmakovigilanz (Arzneimittelsicherheit) nach der Zulassung ist in Deutschland das Paul-Ehrlich-Institut zuständig.</p>
+
+      <h3 class="ui header">Können Frauen mit Kinderwunsch sich gegen COVID-19 impfen lassen?</h3>
+      <p>Ja, auch Frauen mit Kinderwunsch können sich gegen COVID-19 impfen lassen. Die verfügbaren COVID-19 Impfstoffe wurden an Erwachsenen – auch Frauen mit Kinderwunsch – getestet und für sicher und wirksam befunden.</p>
+
+      <h3 class="ui header">Hat die Impfung gegen COVID-19 einen Einfluss von Antigen- und PCR-Testungen?</h3>
+      <p>Es ist nicht davon auszugehen, dass die COVID-19-Impfung positive Antigentests (Schnelltests) hervorruft. Treten nach einer Impfung positive Antigentests auf, sollten Sie einen Arzt konsultieren.</p>
+
+      <h3 class="ui header">Wem soll ein COVID-19-Impfstoff zuerst angeboten werden?</h3>
+      <p>Aufgrund begrenzter Impfstoffverfügbarkeit kann die Impfung zunächst nur bestimmten Personengruppen angeboten werden, die ein besonders hohes Risiko für schwere oder tödliche Verläufe einer COVID-19-Erkrankung haben oder die beruflich entweder besonders exponiert sind oder engen Kontakt zu vulnerablen Personengruppen haben.</p>
+    </div>
+  </div>
+
+  <br>
+
+  <div class="ui inverted vertical footer segment form-page" style="text-align: center">
+    <div class="ui container">
+      &copy; KWM Impfsystem 2021 | All Rights Reserved
+    </div>
+  </div>
+
+</div>
