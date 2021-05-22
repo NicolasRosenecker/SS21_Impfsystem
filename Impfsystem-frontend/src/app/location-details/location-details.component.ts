@@ -23,6 +23,7 @@ export class LocationDetailsComponent implements OnInit {
   ngOnInit() {
     const params = this.route.snapshot.params;
     this.app.getSingle(params['postal_code']).subscribe(l => this.location = l);
+    console.log(localStorage.getItem("is_admin"));
   }
 
   removeLocation(){

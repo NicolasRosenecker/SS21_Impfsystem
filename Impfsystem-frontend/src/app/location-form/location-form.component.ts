@@ -6,6 +6,8 @@ import { LocationFactory } from "../shared/location-factory";
 import { ImpfsystemService } from "../shared/impfsystem.service";
 import { Location, Vaccination } from "../shared/location";
 
+
+
 @Component({
   selector: 'app-location-form',
   templateUrl: './location-form.component.html',
@@ -82,12 +84,12 @@ export class LocationFormComponent implements OnInit {
     }));
   }
 
+
   submitForm() {
     const location: Location = LocationFactory.fromObject(this.locationForm.value);
     location.vaccinations = this.locationForm.value.vaccinations;
     if (this.isUpdatingLocation) {
       this.app.update(location).subscribe(res => {
-        console.log(res);
         this.router.navigate(['../../locations', location.postal_code], {
           relativeTo: this.route
         });

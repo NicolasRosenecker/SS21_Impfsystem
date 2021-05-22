@@ -38,15 +38,16 @@
       <div class="fields" *ngFor="let control of vaccinations?.controls; index as i; last as l" [formGroupName]="i">
         <input type="hidden" name="id">
 
-        <div class="nine wide field">
+        <!-- logged out -->
+        <div class="twelve wide field">
           <input formControlName="vaccination_name" placeholder="Name des Vakzins">
         </div>
 
-        <div class="six wide field">
+        <div class="three wide field">
           <input formControlName="vaccination_date" type="date">
         </div>
 
-        <div class="six wide field">
+        <div class="three wide field">
           <input formControlName="max_participants" type="number" placeholder="100">
         </div>
 

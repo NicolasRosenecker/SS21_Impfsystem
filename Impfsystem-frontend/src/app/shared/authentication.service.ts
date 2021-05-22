@@ -1,66 +1,100 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import jwt_decode from 'jwt-decode';
-import { retry } from 'rxjs/operators';
+import {catchError, retry} from 'rxjs/operators';
+import { User } from '../shared/user';
 
 // Spiegelt Token-Payload vom Server wieder
 interface Token {
   exp: number;
   user: {
-    id: string;
+    id: string,
+    firstname: string,
+    lastname: string,
+    social_security_number: string,
+    email: string,
+    is_admin: boolean,
+    is_vaccinated: boolean,
   };
 }
 
 @Injectable()
 
-  export class AuthenticationService {
+export class AuthenticationService {
 
-    private api = 'http://impfsystem.s1810456030.student.kwmhgb.at/api/auth';
+  private api = 'http://impfsystem.s1810456030.student.kwmhgb.at/api/auth';
+  adminStatus: Object = false;
 
-    constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-    login(email: string, password: string){
-      return this.http.post(`${this.api}/login`, {
-        email,
-        password
-      });
+  login(email: string, password: string){
+    return this.http.post(`${this.api}/login`, {
+      email,
+      password
+    });
+  }
+
+  public setLocalStorage(token: string){
+    const decodedToken = jwt_decode(token) as Token;
+    localStorage.setItem('token', token);
+    localStorage.setItem('firstname', decodedToken.user.firstname);
+    localStorage.setItem('lastname', decodedToken.user.lastname);
+    localStorage.setItem('social_security_number', decodedToken.user.social_security_number);
+    localStorage.setItem('email', decodedToken.user.email);
+    if(decodedToken.user.is_admin){
+      localStorage.setItem('is_admin', String(true));
+
+    } else{
+      localStorage.setItem('is_admin', String(false));
     }
 
-    public setLocalStorage(token: string){
+  }
+
+  logout(){
+    this.http.post(`${this.api}/logout`, {});
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    console.log('logged out');
+  }
+
+  public isLoggedIn(){
+    if (localStorage.getItem('token')) {
+      const token: string = localStorage.getItem('token') || '{}';
       const decodedToken = jwt_decode(token) as Token;
-      localStorage.setItem('token', token);
-      localStorage.setItem('userId', decodedToken.user.id);
-    }
+      const expirationDate: Date = new Date(0);
+      expirationDate.setUTCSeconds(decodedToken.exp);
 
-    public getAdminStatus(){
-      return sessionStorage.getItem('is_admin');
-    }
-
-    logout(){
-      this.http.post(`${this.api}/logout`, {});
-      localStorage.removeItem('token');
-      localStorage.removeItem('userId');
-      console.log('logged out');
-    }
-
-    public isLoggedIn(){
-      if (localStorage.getItem('token')) {
-        const token: string = localStorage.getItem('token') || '{}';
-        const decodedToken = jwt_decode(token) as Token;
-        const expirationDate: Date = new Date(0);
-        expirationDate.setUTCSeconds(decodedToken.exp);
-        if (expirationDate < new Date()) {
-          console.log('token expired');
-          localStorage.removeItem('token');
-          return false;
-        }
-        return true;
-      } else {
+      if (expirationDate < new Date()) {
+        console.log('token expired');
+        localStorage.removeItem('token');
         return false;
       }
-    }
-
-    public isLoggedOut(){
-      return this.isLoggedIn();
+      return true;
+    } else {
+      return false;
     }
   }
+
+  public isLoggedOut(){
+    return this.isLoggedIn();
+  }
+
+  decodeToken(): User {
+      const decodedToken = jwt_decode(<string> localStorage.getItem("token")) as Token;
+      // this.isAdmin();
+
+      return new User(+decodedToken.user.id, decodedToken.user.firstname, decodedToken.user.lastname,
+        decodedToken.user.social_security_number, decodedToken.user.email, decodedToken.user.is_admin,
+        decodedToken.user.is_vaccinated);
+
+    }
+
+  getCurrentUser(): User {
+    return this.decodeToken();
+  }
+
+  isAdmin() {
+    return localStorage.getItem("is_admin") === "true";
+  }
+
+}

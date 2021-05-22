@@ -29,12 +29,11 @@ class UserController extends Controller
     }
 
     // check if user is admin
-    public function isAdmin(int $id) : bool {
-        $user = User::where('id', $id)
-            ->with([])
-            ->first();
-        return $user->is_admin;
+    public function isAdmin(int $id) {
+        $user = User::where('id', $id)->first();
+        return response()->json(boolval($user->is_admin));
     }
+
 
     public function save (Request $request) : JsonResponse {
 

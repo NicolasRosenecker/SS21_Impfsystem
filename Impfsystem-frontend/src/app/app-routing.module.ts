@@ -13,8 +13,7 @@ const routes: Routes = [
   { path: 'admin', component: LocationFormComponent },
   { path: 'login', component: LoginComponent },
   { path: 'locations/:postal_code', component: LocationDetailsComponent },
-  { path: 'admin/:postal_code', component: LocationFormComponent }
-
+  { path: 'admin/:postal_code', component: LocationFormComponent },
 ];
 
 

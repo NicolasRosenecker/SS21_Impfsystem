@@ -1,4 +1,3 @@
-
 <div class="ui grid" *ngIf="location">
   <div class="sixteen wide column">
     <h1 class="ui header">{{ location.location_name }} ({{ location.postal_code }}), {{ location.location_address }}</h1>
@@ -28,11 +27,11 @@
 <button [routerLink]="'/locations'" class="ui blue button">Zurück zu den Locations</button>
 
 
-<button *ngIf="authService.isLoggedIn()" class="ui red labeled icon button" (click)="removeLocation()">
+<button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui red labeled icon button" (click)="removeLocation()">
   <i class="remove icon"></i> Location löschen
 </button>
 
-<button *ngIf="authService.isLoggedIn()" class="ui yellow labeled icon button" [routerLink]="['../../admin', location?.postal_code]">
+<button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui yellow labeled icon button" [routerLink]="['../../admin', location?.postal_code]">
   <i class="write icon"></i> Ortschaft bearbeiten
 </button>
 
