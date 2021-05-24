@@ -1,66 +1,73 @@
-<h1>Formular für Ortschaften</h1>
-<form class="ui large form" [formGroup]="locationForm"
-      (ngSubmit)="submitForm()">
-  <input type="hidden" name="id">
+<div style="width: 80%; margin: auto;">
+  <h1>Formular für Ortschaften und Impftermine</h1>
+  <form class="ui large form" [formGroup]="locationForm"
+        (ngSubmit)="submitForm()">
+    <input type="hidden" name="id">
 
-  <div class="field">
-    <label>Ortsname</label>
-    <input formControlName="location_name">
-    <div *ngIf="errors.location_name" class="ui negative message">
-      {{ errors.location_name}}
-    </div>
-  </div>
-
-  <div class="field" [class.disabled]="isUpdatingLocation">
-    <label>Postleitzahl</label>
-    <input formControlName="postal_code">
-    <div *ngIf="errors.postal_code" class="ui negative message">{{ errors.postal_code }}
-    </div>
-  </div>
-
-  <div class="field">
-    <label>Addresse</label>
-    <input formControlName="location_address">
-    <div *ngIf="errors.location_address" class="ui negative message">
-      {{ errors.location_address}}
-    </div>
-  </div>
-
-  <div class="field">
-    <label>Beschreibung</label>
-    <textarea formControlName="location_description" rows="3"></textarea>
-  </div>
-
-  <div class="field">
-    <label>Impfungen</label>
-    <div formArrayName="vaccinations">
-
-      <div class="fields" *ngFor="let control of vaccinations?.controls; index as i; last as l" [formGroupName]="i">
-        <input type="hidden" name="id">
-
-        <!-- logged out -->
-        <div class="twelve wide field">
-          <input formControlName="vaccination_name" placeholder="Name des Vakzins">
-        </div>
-
-        <div class="three wide field">
-          <input formControlName="vaccination_date" type="date">
-        </div>
-
-        <div class="three wide field">
-          <input formControlName="max_participants" type="number" placeholder="100">
-        </div>
-
-        <div class="one wide field" *ngIf="l">
-          <button (click)="addVaccinationControl()" class="ui large blue button"
-                  type="button">+</button>
-        </div>
+    <div class="field">
+      <label>Ortsname</label>
+      <input formControlName="location_name">
+      <div *ngIf="errors.location_name" class="ui negative message">
+        {{ errors.location_name}}
       </div>
     </div>
 
-    <div *ngIf="errors.vaccinations" class="ui negative message">
-      {{ errors.vaccinations }}</div>
+    <div class="field" [class.disabled]="isUpdatingLocation">
+      <label>Postleitzahl</label>
+      <input formControlName="postal_code">
+      <div *ngIf="errors.postal_code" class="ui negative message">{{ errors.postal_code }}
+      </div>
     </div>
 
-  <button type="submit" class="ui blue button" [disabled]="locationForm.invalid">Speichern</button>
-</form>
+    <div class="field">
+      <label>Addresse</label>
+      <input formControlName="location_address">
+      <div *ngIf="errors.location_address" class="ui negative message">
+        {{ errors.location_address}}
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Beschreibung</label>
+      <textarea formControlName="location_description" rows="3"></textarea>
+    </div>
+
+    <div class="field">
+      <label>Impfungen</label>
+      <div formArrayName="vaccinations">
+
+        <div class="fields" *ngFor="let control of vaccinations?.controls; index as i; last as l" [formGroupName]="i">
+          <input type="hidden" name="id">
+
+          <!-- logged out -->
+          <div class="twelve wide field">
+            <input formControlName="vaccination_name" placeholder="Name des Vakzins">
+          </div>
+
+          <div class="three wide field">
+            <input formControlName="vaccination_date" type="date">
+          </div>
+
+          <div class="three wide field">
+            <input formControlName="max_participants" type="number" placeholder="100">
+          </div>
+
+          <div class="one wide field" *ngIf="l">
+            <button (click)="addVaccinationControl()" class="ui large blue button"
+                    type="button">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="errors.vaccinations" class="ui negative message">
+        {{ errors.vaccinations }}</div>
+      </div>
+
+    <button type="submit" class="ui blue button" [disabled]="locationForm.invalid">Speichern</button>
+  </form>
+  <div class="ui inverted vertical footer segment form-page" style="text-align: center; position: absolute; right: 0; bottom: 0;  left: 0;">
+    <div class="ui container">
+      &copy; KWM Impfsystem 2021 | All Rights Reserved
+    </div>
+  </div>
+</div>

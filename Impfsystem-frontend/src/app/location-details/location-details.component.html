@@ -1,40 +1,47 @@
-<div class="ui grid" *ngIf="location">
-  <div class="sixteen wide column">
-    <h1 class="ui header">{{ location.location_name }} ({{ location.postal_code }}), {{ location.location_address }}</h1>
-    <div class="ui divider"></div>
-  </div>
+<div style="width: 80%; margin: auto;">
+  <div class="ui grid" *ngIf="location">
+    <div class="sixteen wide column">
+      <h1 class="ui header">{{ location.location_name }} ({{ location.postal_code }}), {{ location.location_address }}</h1>
+      <p>{{ location.location_description }}</p>
 
-  <div class="sixteen wide column">
-    <h3 class="ui header">Beschreibung</h3>
-    <p>{{ location.location_description }}</p>
-  </div>
+      <button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui yellow labeled icon button" [routerLink]="['../../admin', location?.postal_code]">
+        <i class="write icon"></i> Ortschaft bearbeiten
+      </button>
 
-  <div class="ui grid">
-    <div class="one column">
-      <h4 class="ui header">Verfügbare Impfungen</h4>
-      <span *ngFor="let vaccination of location?.vaccinations; last as l">
-            <b>{{ vaccination.vaccination_name }}</b>, verfügbar am {{ vaccination.vaccination_date }}<br/>
-            <span *ngIf="vaccination.max_participants === vaccination.participants">Impftermin bereits ausgebucht.</span>
-            <span *ngIf="vaccination.max_participants != vaccination.participants">
-            {{ vaccination.participants }} von {{ vaccination.max_participants }} Plätzen bereits belegt.<br/></span>
-          <span *ngIf="!l"><br/></span>
-      </span>
+      <button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui red labeled icon button" (click)="removeLocation()">
+        <i class="remove icon"></i> Ortschaft löschen
+      </button>
+
+      <div class="ui divider"></div>
     </div>
   </div>
+
+  <div class="ui items">
+    <h2 class="ui header">Verfügbare Impfungen in {{ location.location_name }}</h2>
+    <div class="item" *ngFor="let vaccination of location?.vaccinations; last as l">
+      <div class="content">
+        <h3 class="header">{{ vaccination.vaccination_name }}, verfügbar am {{ vaccination.vaccination_date }}</h3>
+        <div class="meta">
+          <span *ngIf="vaccination.max_participants === vaccination.participants">Impftermin bereits ausgebucht.</span>
+          <span *ngIf="vaccination.max_participants != vaccination.participants">
+              {{ vaccination.participants }} von {{ vaccination.max_participants }} Plätzen bereits belegt.<br/></span>
+        </div>
+        <button *ngIf="authService.isLoggedIn() && !authService.isVaccinated()" class="ui green labeled icon button" >
+          <i class="syringe icon"></i> Anmelden
+        </button><div class="ui divider"></div>
+      </div><div class="ui divider"></div>
+    </div>
+  </div>
+
+  <button [routerLink]="'/locations'" class="ui blue button">Zurück zu den Ortschaften</button>
+
+  <div class="ui inverted vertical footer segment form-page" style="text-align: center; position: absolute; right: 0; bottom: 0;  left: 0;">
+    <div class="ui container">
+      &copy; KWM Impfsystem 2021 | All Rights Reserved
+    </div>
+  </div>
+
 </div>
-
-<br/>
-<button [routerLink]="'/locations'" class="ui blue button">Zurück zu den Locations</button>
-
-
-<button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui red labeled icon button" (click)="removeLocation()">
-  <i class="remove icon"></i> Location löschen
-</button>
-
-<button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui yellow labeled icon button" [routerLink]="['../../admin', location?.postal_code]">
-  <i class="write icon"></i> Ortschaft bearbeiten
-</button>
-
 
 
 

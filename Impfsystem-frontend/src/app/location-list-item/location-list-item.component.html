@@ -1,11 +1,5 @@
-<div class="content">
-  <h1 class="header">{{ location.location_name }}</h1>
+<div class="content" style="margin-top: 1em;">
+  <h1 class="header">{{ location.location_name }} ({{ location.postal_code}})</h1>
   <div class="description"> {{ location.location_address }} </div>
   <div class="description"> {{ location.location_description }} </div>
-  <div class="vaccinations">
-    <span *ngFor="let vaccination of location.vaccinations; last as l">
-      {{ vaccination.vaccination_name }} {{ vaccination.vaccination_date }}
-      <span *ngIf="!l"><br/></span>
-    </span>
-  </div>
 </div>

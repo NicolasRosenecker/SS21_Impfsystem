@@ -1,4 +1,4 @@
-<div class="ui middle aligned selection divided list">
+<div style="width: 80%; margin: auto;" class="ui middle aligned selection divided list">
   <a *ngFor="let location of locations" class="item app-location-list-item"
     [location]="location"
     [routerLink]="location.postal_code">
@@ -8,5 +8,10 @@
   </div>
   <p *ngIf="locations && !locations.length">Es wurden noch keine Locations
     eingetragen.</p>
-
+</div>
+<br/>
+<div class="ui inverted vertical footer segment form-page" style="text-align: center">
+  <div class="ui container">
+    &copy; KWM Impfsystem 2021 | All Rights Reserved
+  </div>
 </div>

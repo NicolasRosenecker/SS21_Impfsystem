@@ -1,18 +1,21 @@
 <div *ngIf="!isLoggedIn()">
-  <h1>Login</h1>
-  <form class="ui large form" [formGroup]="loginForm"
+  <h1 style="width: 50%; margin: auto">Login zum KWM Impfsystem</h1>
+  <br>
+  <form style="width: 50%; margin: auto" class="ui form" [formGroup]="loginForm"
         (ngSubmit)="login()">
 
     <div class="field">
       <label>E-Mail</label>
-      <input type="email" id="username" formControlName="username">
+      <div class="ui left icon input">
+        <i class="mail icon"></i>
+        <input type="email" id="username" formControlName="username" placeholder="Beispiel@gmail.com">
+      </div>
       <div *ngIf="loginForm.get('username')!.invalid &&
           (loginForm.get('username')!.dirty ||
            loginForm.get('username')!.touched) &&
            loginForm.get('username')!.hasError('required')" class="ui negative
                 message">E-Mail Eingabe ist verpflichtend.
       </div>
-
       <div *ngIf="loginForm.get('username')!.invalid &&
             (loginForm.get('username')!.dirty ||
             loginForm.get('username')!.touched) &&
@@ -23,18 +26,36 @@
 
     <div class="field">
       <label>Passwort</label>
-      <input type="password" formControlName="password">
+      <div class="ui left icon input">
+        <i class="lock icon"></i>
+        <input type="password" formControlName="password" placeholder="Passwort">
+      </div>
       <div *ngIf="loginForm.get('password')!.invalid &&
             (loginForm.get('password')!.dirty ||
             loginForm.get('password')!.touched)" class="ui negative message">
-            Passwort ist verpflichtend.
+        Passwort ist verpflichtend.
       </div>
     </div>
 
-    <button type="submit" class="ui button" [disabled]="loginForm.invalid">Login</button>
+    <button type="submit" class="ui blue button" [disabled]="loginForm.invalid">Login</button>
   </form>
 </div>
 
 <div *ngIf="isLoggedIn()">
-  <button type="button" class="ui button" (click)="logout()">Logout</button>
+  <div style="width: 80%; margin: auto; text-align: center">
+    <h1>Sie sind aktuell als {{authService.getFirstName()}} {{authService.getLastName()}} im KWM Impfsystem angemeldet.</h1>
+    <p *ngIf="authService.isVaccinated()">Da Sie bereits eine Impfung erhalten haben, können Sie sich für keine weiteren Termine anmelden. Sie können das KWM Impfsystem dennoch weiterhin zum Browsen verwenden.</p>
+    <p *ngIf="!authService.isVaccinated()">Sie haben aktuell noch keine Impfung erhalten. Über den Reiter <b>Ortschaften</b> können Sie sich einen Impftermin in Ihrer Nähe suchen!</p>
+    <br>
+    <p>Mit einem Klick auf den Logout-Button können Sie sich bei Bedarf vom System abmelden.</p>
+    <button type="button" class="ui blue button" (click)="logout()">Logout</button>
+  </div>
 </div>
+
+<div class="ui inverted vertical footer segment form-page" style="text-align: center; position: absolute; right: 0; bottom: 0;  left: 0;">
+  <div class="ui container">
+    &copy; KWM Impfsystem 2021 | All Rights Reserved
+  </div>
+</div>
+
+

@@ -109,4 +109,12 @@ export class AuthenticationService {
     return localStorage.getItem("firstname");
   }
 
+  getLastName() {
+    return localStorage.getItem("lastname");
+  }
+
+  attendVaccination(){
+
+  }
+
 }
