@@ -42,7 +42,7 @@
 </div>
 
 <div *ngIf="isLoggedIn()">
-  <div style="width: 80%; margin: auto; text-align: center">
+  <div style="width: 80%; margin: auto; text-align: center; padding-top: 1em;">
     <h1>Sie sind aktuell als {{authService.getFirstName()}} {{authService.getLastName()}} im KWM Impfsystem angemeldet.</h1>
     <p *ngIf="authService.isVaccinated()">Da Sie bereits eine Impfung erhalten haben, können Sie sich für keine weiteren Termine anmelden. Sie können das KWM Impfsystem dennoch weiterhin zum Browsen verwenden.</p>
     <p *ngIf="!authService.isVaccinated()">Sie haben aktuell noch keine Impfung erhalten. Über den Reiter <b>Ortschaften</b> können Sie sich einen Impftermin in Ihrer Nähe suchen!</p>
