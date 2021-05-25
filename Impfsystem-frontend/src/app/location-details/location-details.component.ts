@@ -4,6 +4,7 @@ import { ImpfsystemService } from "../shared/impfsystem.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import { LocationFactory } from "../shared/location-factory";
 import { AuthenticationService } from '../shared/authentication.service';
+import {User} from '../shared/user';
 
 @Component({
   selector: 'app-location-details',
@@ -50,6 +51,28 @@ export class LocationDetailsComponent implements OnInit {
         }
       }
     }
+
+
+    // nicht funktionstüchtig
+    let birthdateString = localStorage.getItem("birthdate")!.split("-");
+    let birthdate =  new Date(Number(birthdateString[0] ) , Number(birthdateString[1] ), Number(birthdateString[2]));
+
+
+    let currentUser: User = new User(
+      Number(localStorage.getItem("id")),
+      localStorage.getItem("firstname")!,
+      localStorage.getItem("lastname")!,
+      localStorage.getItem("social_security_number")!,
+      localStorage.getItem("email")!,
+      0,
+      new Date(birthdate),
+      localStorage.getItem("phone")!,
+      localStorage.getItem("gender")!,
+    )
+    currentUser.is_admin = localStorage.getItem("is_admin") === "true";
+    currentUser.is_vaccinated = localStorage.getItem("is_vaccinated") === "true";
+    currentUser.vaccination_id = $id;
+    this.app.updateUser(currentUser).subscribe();
 
 
   }

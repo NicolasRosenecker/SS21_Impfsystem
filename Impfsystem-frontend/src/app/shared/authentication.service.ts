@@ -13,6 +13,10 @@ interface Token {
     lastname: string,
     social_security_number: string,
     email: string,
+    vaccination_id: number,
+    birthdate: Date,
+    phone: string,
+    gender: string,
     is_admin: boolean,
     is_vaccinated: boolean,
   };
@@ -41,6 +45,11 @@ export class AuthenticationService {
     localStorage.setItem('lastname', decodedToken.user.lastname);
     localStorage.setItem('social_security_number', decodedToken.user.social_security_number);
     localStorage.setItem('email', decodedToken.user.email);
+    localStorage.setItem('vaccination_id', String(decodedToken.user.vaccination_id));
+    // @ts-ignore
+    localStorage.setItem('birthdate', decodedToken.user.birthdate);
+    localStorage.setItem('phone', decodedToken.user.phone);
+    localStorage.setItem('gender', decodedToken.user.gender);
     if(decodedToken.user.is_admin){
       localStorage.setItem('is_admin', String(true));
 
@@ -88,8 +97,8 @@ export class AuthenticationService {
       const decodedToken = jwt_decode(<string> localStorage.getItem("token")) as Token;
 
       return new User(+decodedToken.user.id, decodedToken.user.firstname, decodedToken.user.lastname,
-        decodedToken.user.social_security_number, decodedToken.user.email, decodedToken.user.is_admin,
-        decodedToken.user.is_vaccinated);
+        decodedToken.user.social_security_number, decodedToken.user.email, decodedToken.user.vaccination_id, decodedToken.user.birthdate,
+        decodedToken.user.phone, decodedToken.user.gender, decodedToken.user.is_admin, decodedToken.user.is_vaccinated);
 
     }
 
