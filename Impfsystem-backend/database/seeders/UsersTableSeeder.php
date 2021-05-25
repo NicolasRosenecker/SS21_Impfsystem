@@ -61,6 +61,7 @@ class UsersTableSeeder extends Seeder
         $user3->phone = "+43123456789011";
         $user3->is_Admin = false;
         $user3->is_vaccinated = true;
+        $user3->vaccination_id = 1;
         $user3->save();
     }
 }

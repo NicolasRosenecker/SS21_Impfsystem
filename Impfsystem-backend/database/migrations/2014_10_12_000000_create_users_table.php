@@ -26,6 +26,7 @@ class CreateUsersTable extends Migration
             $table->string('phone');
             $table->boolean('is_admin');
             $table->boolean('is_vaccinated');
+            $table->foreignId('vaccination_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
 
