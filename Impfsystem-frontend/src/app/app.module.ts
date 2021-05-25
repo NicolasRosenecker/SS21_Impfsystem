@@ -8,13 +8,19 @@ import { LocationListItemComponent } from './location-list-item/location-list-it
 import { LocationDetailsComponent } from './location-details/location-details.component';
 import { ImpfsystemService } from "./shared/impfsystem.service";
 import { HomeComponent } from './home/home.component';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { LocationFormComponent } from './location-form/location-form.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
 import { AuthenticationService } from "./shared/authentication.service";
-import {TokenInterceptorService} from './shared/token-interceptor.service';
-import {JwtInterceptorService} from './shared/jwt-interceptor.service';
+import { TokenInterceptorService } from './shared/token-interceptor.service';
+import { JwtInterceptorService } from './shared/jwt-interceptor.service';
+
+import { LOCALE_ID } from '@angular/core';
+import { registerLocaleData } from '@angular/common';
+import localDe from '@angular/common/locales/de';
+
+registerLocaleData(localDe);
 
 @NgModule({
   declarations: [
@@ -33,6 +39,9 @@ import {JwtInterceptorService} from './shared/jwt-interceptor.service';
     ReactiveFormsModule
   ],
   providers: [ImpfsystemService, AuthenticationService,
+    {
+      provide:LOCALE_ID, useValue: 'de'
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,

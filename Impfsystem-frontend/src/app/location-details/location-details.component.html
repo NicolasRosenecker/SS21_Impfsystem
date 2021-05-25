@@ -20,7 +20,7 @@
     <h2 class="ui header">Verfügbare Impfungen in {{ location.location_name }}</h2>
     <div class="item" *ngFor="let vaccination of location?.vaccinations; last as l">
       <div class="content">
-        <h3 class="header">{{ vaccination.vaccination_name }}, verfügbar am {{ vaccination.vaccination_date }}</h3>
+        <h3 class="header">{{ vaccination.vaccination_name }}, verfügbar am {{ vaccination.vaccination_date | date:'longDate'}}</h3>
         <div class="meta">
           <span *ngIf="vaccination.max_participants === vaccination.participants">Impftermin bereits ausgebucht.</span>
           <span *ngIf="vaccination.max_participants != vaccination.participants">
