@@ -5,6 +5,7 @@ import { LocationFormErrorMessages } from "./location-form-error-messages";
 import { LocationFactory } from "../shared/location-factory";
 import { ImpfsystemService } from "../shared/impfsystem.service";
 import { Location, Vaccination } from "../shared/location";
+import {VaccinationFactory} from '../shared/vaccination-factory';
 
 
 
@@ -76,35 +77,64 @@ export class LocationFormComponent implements OnInit {
 
   addVaccinationControl() {
     this.vaccinations.push(this.fb.group({
-      id: null, // get next available id
-      vaccination_date: null,
+      vaccination_date: new Date("2021-01-01"),
       vaccination_name: null,
       max_participants: null,
-      users: []
+      participants: 0,
     }));
   }
 
 
   submitForm() {
     const location: Location = LocationFactory.fromObject(this.locationForm.value);
+    let updateCounter = 0;
     location.vaccinations = this.locationForm.value.vaccinations;
-    for(let vaccination of location.vaccinations){
-      vaccination.users = []
-    }
+    location.location_description = this.locationForm.value.location_description;
+
+    // Updating
     if (this.isUpdatingLocation) {
+      // update Vaccinations
+      for(let vaccine of this.location.vaccinations){
+        vaccine.vaccination_name = this.locationForm.value.vaccinations[updateCounter].vaccination_name;
+        vaccine.vaccination_date = this.locationForm.value.vaccinations[updateCounter].vaccination_date;
+        vaccine.max_participants = this.locationForm.value.vaccinations[updateCounter].max_participants;
+        this.app.updateVaccination(vaccine).subscribe(res => {
+          this.router.navigate(['../../locations', location.postal_code], {
+            relativeTo: this.route
+          });
+        });
+        updateCounter ++;
+      }
+      // update Location
       this.app.update(location).subscribe(res => {
         this.router.navigate(['../../locations', location.postal_code], {
           relativeTo: this.route
         });
       });
-    } else {
+    }
+
+    // Creating
+    else {
       this.app.create(location).subscribe(res => {
         this.location = LocationFactory.empty();
         this.locationForm.reset(LocationFactory.empty());
         this.router.navigate(['../locations'], {
           relativeTo: this.route
         });
-      })
+      });
+
+      for(let vaccine of this.locationForm.value.vaccinations){
+        this.app.getSingle(location.postal_code).subscribe(location => {
+          this.location = location;
+
+          let addVaccine = VaccinationFactory.empty();
+          addVaccine.location_id = location.id;
+          addVaccine.vaccination_date = vaccine.vaccination_date;
+          addVaccine.vaccination_name = vaccine.vaccination_name;
+          addVaccine.max_participants = vaccine.max_participants;
+          this.app.createVaccination(addVaccine).subscribe();
+        });
+      }
     }
   }
 

@@ -37,6 +37,16 @@ export class ImpfsystemService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler));
   }
 
+  createVaccination(vaccination: Vaccination): Observable<any> {
+    return this.http.post(`${this.api}/vaccination`, vaccination)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler))
+  }
+
+  updateVaccination(vaccination: Vaccination): Observable<any> {
+    return this.http.put(`${this.api}/vaccination/${vaccination.id}`, vaccination)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
   private errorHandler(error: Error | any): Observable<any> {
     return throwError(error);
   }

@@ -97,6 +97,10 @@ export class AuthenticationService {
     return this.decodeToken();
   }
 
+  hasAvailableSlots(participants: number, maxParticipants: number){
+    return participants < maxParticipants;
+  }
+
   isAdmin() {
     return localStorage.getItem("is_admin") === "true";
   }

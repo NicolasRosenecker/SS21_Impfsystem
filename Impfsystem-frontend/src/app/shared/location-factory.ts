@@ -1,4 +1,5 @@
 import { Location } from "./location";
+import { VaccinationFactory } from './vaccination-factory';
 
 export class LocationFactory {
 
@@ -8,22 +9,7 @@ export class LocationFactory {
       "",
       "",
       "",
-      [{
-        id: 0,
-        vaccination_name: "",
-        vaccination_date: new Date("2021-01-01 11:59:59"),
-        max_participants: 0,
-        participants: 0,
-        users: [{
-            id: 0,
-            firstname: "",
-            lastname: "",
-            social_security_number: "",
-            email: "",
-            is_admin: false,
-            is_vaccinated: false
-        }]
-      }],
+      [VaccinationFactory.empty()],
       "",)
   }
 

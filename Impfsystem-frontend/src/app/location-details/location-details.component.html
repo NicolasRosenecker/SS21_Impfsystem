@@ -5,11 +5,11 @@
       <p>{{ location.location_description }}</p>
 
       <button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui yellow labeled icon button" [routerLink]="['../../admin', location?.postal_code]">
-        <i class="write icon"></i> Ortschaft bearbeiten
+        <i class="write icon"></i> Ortschaft und Impfungen bearbeiten
       </button>
 
       <button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui red labeled icon button" (click)="removeLocation()">
-        <i class="remove icon"></i> Ortschaft löschen
+        <i class="remove icon"></i> Ortschaft samt Impfungen löschen
       </button>
 
       <div class="ui divider"></div>
@@ -26,7 +26,7 @@
           <span *ngIf="vaccination.max_participants != vaccination.participants">
               {{ vaccination.participants }} von {{ vaccination.max_participants }} Plätzen bereits belegt.<br/></span>
         </div>
-        <button *ngIf="authService.isLoggedIn() && !authService.isVaccinated()" class="ui green labeled icon button" (click)="attendVaccination()">
+        <button *ngIf="authService.isLoggedIn() && !authService.isVaccinated()" class="ui green labeled icon button" (click)="enrollToVaccination(vaccination.id)" [disabled]="!authService.hasAvailableSlots(vaccination.participants, vaccination.max_participants)">
           <i class="syringe icon"></i> Anmelden
         </button><div class="ui divider"></div>
       </div><div class="ui divider"></div>

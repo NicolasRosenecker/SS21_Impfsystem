@@ -14,5 +14,9 @@ export const LocationFormErrorMessages = [
 
   new ErrorMessage('vaccination', 'required', 'Ein Ort muss mindestens einen Impftermin anbieten.'),
 
+  new ErrorMessage('vaccination_name', 'required', 'Ein Vakzin muss über einen Namen verfügen.'),
+  new ErrorMessage('vaccination_date', 'required', 'Ein Vakzin muss über ein Datum verfügen.'),
+  new ErrorMessage('max_participants', 'required', 'Eine maximale Teilnehmer:innenanzahl muss angegeben werden.'),
+
 
 ];

@@ -42,14 +42,24 @@
           <!-- logged out -->
           <div class="twelve wide field">
             <input formControlName="vaccination_name" placeholder="Name des Vakzins">
+            <div *ngIf="errors.vaccination_name" class="ui negative message">
+              {{ errors.vaccination_name}}
+            </div>
           </div>
+
 
           <div class="three wide field">
             <input formControlName="vaccination_date" type="date">
+            <div *ngIf="errors.vaccination_date" class="ui negative message">
+              {{ errors.vaccination_date}}
+            </div>
           </div>
 
           <div class="three wide field">
             <input formControlName="max_participants" type="number" placeholder="100">
+            <div *ngIf="errors.max_participants" class="ui negative message">
+              {{ errors.max_participants}}
+            </div>
           </div>
 
           <div class="one wide field" *ngIf="l">

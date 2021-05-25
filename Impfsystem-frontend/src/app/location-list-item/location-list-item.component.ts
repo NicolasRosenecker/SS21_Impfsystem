@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Location} from "../shared/location";
+import { Location } from "../shared/location";
 
 @Component({
   selector: 'a.app-location-list-item',

@@ -41,6 +41,7 @@ Route::get('vaccinations/{id}', [\App\Http\Controllers\VaccinationController::cl
 Route::get('vaccinations/isfullybooked/{id}', [\App\Http\Controllers\VaccinationController::class, 'isFullyBooked']);
 
 // Saving a vaccine happens inside the creation process of a location
+Route::post('vaccination', [\App\Http\Controllers\VaccinationController::class, 'save']);
 Route::put('vaccination/{id}', [\App\Http\Controllers\VaccinationController::class, 'update']);
 Route::delete('vaccination/{id}', [\App\Http\Controllers\VaccinationController::class, 'delete']);
 // ======================================
