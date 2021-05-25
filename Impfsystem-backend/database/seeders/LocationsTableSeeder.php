@@ -28,13 +28,13 @@ class LocationsTableSeeder extends Seeder
 
         $vaccine1 = new \App\Models\Vaccination;
         $vaccine1->vaccination_date = new DateTime();
-        $vaccine1->vaccination_name = "AZ";
+        $vaccine1->vaccination_name = "Pfizer/Biontech";
         $vaccine1->max_participants = 100;
         $vaccine1->participants = 24;
 
         $vaccine2 = new \App\Models\Vaccination;
         $vaccine2->vaccination_date = new DateTime();
-        $vaccine2->vaccination_name = "AZ";
+        $vaccine2->vaccination_name = "Astra Zeneca";
         $vaccine2->max_participants = 50;
         $vaccine2->participants = 50;
 
@@ -52,13 +52,13 @@ class LocationsTableSeeder extends Seeder
 
         $vaccine3 = new \App\Models\Vaccination;
         $vaccine3->vaccination_date = new DateTime();
-        $vaccine3->vaccination_name = "AZ";
+        $vaccine3->vaccination_name = "Astra Zeneca";
         $vaccine3->max_participants = 99;
         $vaccine3->participants = 1;
 
         $vaccine4 = new \App\Models\Vaccination;
         $vaccine4->vaccination_date = new DateTime();
-        $vaccine4->vaccination_name = "AZ";
+        $vaccine4->vaccination_name = "Moderna";
         $vaccine4->max_participants = 49;
         $vaccine4->participants = 7;
 

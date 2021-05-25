@@ -1,11 +1,12 @@
-<div class="ui {{isLoggedIn()?'four':'three'}} item tabs menu" style="position: sticky; position: -webkit-sticky; z-index: 99;
+<div  style="display:unset;">
+  <div class="ui {{authService.isAdmin()?'four':'three'}} item tabs menu" style="position: sticky; position: -webkit-sticky; z-index: 99;
   top: 0;">
-  <a routerLink="home" routerLinkActive="active" class="item">Home</a>
-  <a routerLink="locations" routerLinkActive="active" class="item">Ortschaften</a>
-  <a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active"
-     class="item">Administration</a>
-  <a routerLink="login" routerLinkActive="active"
-     class="item">{{getLoginLabel()}}</a>
+    <a routerLink="home" routerLinkActive="active" class="item">Home</a>
+    <a routerLink="locations" routerLinkActive="active" class="item">Ortschaften</a>
+    <a *ngIf="authService.isAdmin()" routerLink="admin" routerLinkActive="active"
+       class="item">Administration</a>
+    <a routerLink="login" routerLinkActive="active"
+       class="item">{{getLoginLabel()}}</a>
+  </div>
 </div>
-
 <router-outlet></router-outlet>

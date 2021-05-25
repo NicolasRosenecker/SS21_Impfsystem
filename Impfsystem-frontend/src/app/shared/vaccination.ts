@@ -1,4 +1,5 @@
-
+import { User } from "./user";
+export { User } from "./user";
 
 export class Vaccination {
   constructor(
@@ -7,6 +8,7 @@ export class Vaccination {
     public vaccination_name: string,
     public max_participants: number,
     public participants: number,
+    public users: User[]
   ) { }
 }
 

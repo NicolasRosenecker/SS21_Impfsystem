@@ -23,6 +23,7 @@ export class LocationDetailsComponent implements OnInit {
   ngOnInit() {
     const params = this.route.snapshot.params;
     this.app.getSingle(params['postal_code']).subscribe(l => this.location = l);
+    console.log(this.location.vaccinations);
   }
 
   removeLocation(){
@@ -32,5 +33,9 @@ export class LocationDetailsComponent implements OnInit {
           this.route }));
       }
     }
+
+  attendVaccination(){
+    console.log(this.location.vaccinations);
+  }
 
 }

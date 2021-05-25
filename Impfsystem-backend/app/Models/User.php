@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -67,5 +69,9 @@ class User extends Authenticatable implements JWTSubject
             "is_vaccinated" => $this->is_vaccinated,
         ]];
     }
+    public function vaccination() : HasOne{
+        return $this->hasOne(Vaccination::class);
+    }
+
 }
 

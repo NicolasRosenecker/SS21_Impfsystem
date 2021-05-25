@@ -36,6 +36,7 @@ export class AuthenticationService {
   public setLocalStorage(token: string){
     const decodedToken = jwt_decode(token) as Token;
     localStorage.setItem('token', token);
+    localStorage.setItem('id', decodedToken.user.id);
     localStorage.setItem('firstname', decodedToken.user.firstname);
     localStorage.setItem('lastname', decodedToken.user.lastname);
     localStorage.setItem('social_security_number', decodedToken.user.social_security_number);
@@ -85,7 +86,6 @@ export class AuthenticationService {
 
   decodeToken(): User {
       const decodedToken = jwt_decode(<string> localStorage.getItem("token")) as Token;
-      // this.isAdmin();
 
       return new User(+decodedToken.user.id, decodedToken.user.firstname, decodedToken.user.lastname,
         decodedToken.user.social_security_number, decodedToken.user.email, decodedToken.user.is_admin,
@@ -113,8 +113,6 @@ export class AuthenticationService {
     return localStorage.getItem("lastname");
   }
 
-  attendVaccination(){
 
-  }
 
 }

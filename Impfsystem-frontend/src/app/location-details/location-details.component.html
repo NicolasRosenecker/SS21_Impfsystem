@@ -1,7 +1,7 @@
 <div style="width: 80%; margin: auto;">
   <div class="ui grid" *ngIf="location">
     <div class="sixteen wide column">
-      <h1 class="ui header">{{ location.location_name }} ({{ location.postal_code }}), {{ location.location_address }}</h1>
+      <h1 class="ui header" style="padding-top: 1em">{{ location.location_name }} ({{ location.postal_code }}), {{ location.location_address }}</h1>
       <p>{{ location.location_description }}</p>
 
       <button *ngIf="authService.isLoggedIn() && authService.isAdmin()" class="ui yellow labeled icon button" [routerLink]="['../../admin', location?.postal_code]">
@@ -26,7 +26,7 @@
           <span *ngIf="vaccination.max_participants != vaccination.participants">
               {{ vaccination.participants }} von {{ vaccination.max_participants }} Plätzen bereits belegt.<br/></span>
         </div>
-        <button *ngIf="authService.isLoggedIn() && !authService.isVaccinated()" class="ui green labeled icon button" >
+        <button *ngIf="authService.isLoggedIn() && !authService.isVaccinated()" class="ui green labeled icon button" (click)="attendVaccination()">
           <i class="syringe icon"></i> Anmelden
         </button><div class="ui divider"></div>
       </div><div class="ui divider"></div>

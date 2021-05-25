@@ -5,12 +5,13 @@ import { LocationListComponent } from "./location-list/location-list.component";
 import { HomeComponent } from "./home/home.component";
 import {LocationFormComponent} from "./location-form/location-form.component";
 import {LoginComponent} from "./login/login.component";
+import {CanNavigateToAdminGuard} from './can-navigate-to-admin.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'locations', component: LocationListComponent },
-  { path: 'admin', component: LocationFormComponent },
+  { path: 'admin', component: LocationFormComponent, canActivate:[CanNavigateToAdminGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'locations/:postal_code', component: LocationDetailsComponent },
   { path: 'admin/:postal_code', component: LocationFormComponent },
@@ -20,6 +21,6 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [CanNavigateToAdminGuard]
 })
 export class AppRoutingModule { }

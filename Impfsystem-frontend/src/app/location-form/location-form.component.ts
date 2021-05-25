@@ -75,12 +75,12 @@ export class LocationFormComponent implements OnInit {
   }
 
   addVaccinationControl() {
-    console.log(this.vaccinations);
     this.vaccinations.push(this.fb.group({
       id: null, // get next available id
       vaccination_date: null,
       vaccination_name: null,
       max_participants: null,
+      users: []
     }));
   }
 
@@ -88,6 +88,9 @@ export class LocationFormComponent implements OnInit {
   submitForm() {
     const location: Location = LocationFactory.fromObject(this.locationForm.value);
     location.vaccinations = this.locationForm.value.vaccinations;
+    for(let vaccination of location.vaccinations){
+      vaccination.users = []
+    }
     if (this.isUpdatingLocation) {
       this.app.update(location).subscribe(res => {
         this.router.navigate(['../../locations', location.postal_code], {

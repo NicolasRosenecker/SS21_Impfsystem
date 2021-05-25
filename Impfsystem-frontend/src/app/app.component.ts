@@ -6,11 +6,12 @@ import {AuthenticationService} from "./shared/authentication.service";
 })
 export class AppComponent {
   //location: Location;
-  constructor(private authService: AuthenticationService) { }
+  constructor(public authService: AuthenticationService) { }
 
   isLoggedIn() {
     return this.authService.isLoggedIn();
   }
+
   getLoginLabel(){
     if(this.isLoggedIn()){
       return "Logout";
