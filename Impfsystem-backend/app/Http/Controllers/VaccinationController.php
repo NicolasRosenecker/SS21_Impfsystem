@@ -31,12 +31,11 @@ class VaccinationController extends Controller
     }
 
     public function save (Request $request) : JsonResponse {
-
         DB::beginTransaction();
         try {
-
+            //var_dump($request->all());
+            //die();
             $vaccination = Vaccination::create($request->all());
-
             DB::commit();
             return response()->json($vaccination, 201);
         }

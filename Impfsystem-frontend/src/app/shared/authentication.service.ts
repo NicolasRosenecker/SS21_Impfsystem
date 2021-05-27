@@ -68,6 +68,7 @@ export class AuthenticationService {
     this.http.post(`${this.api}/logout`, {});
     localStorage.removeItem('token');
     localStorage.removeItem('userId');
+    localStorage.clear();
     console.log('logged out');
   }
 

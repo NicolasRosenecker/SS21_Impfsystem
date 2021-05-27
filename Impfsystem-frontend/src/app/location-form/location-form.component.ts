@@ -94,16 +94,23 @@ export class LocationFormComponent implements OnInit {
     // Updating
     if (this.isUpdatingLocation) {
       // update Vaccinations
-      for(let vaccine of this.location.vaccinations){
+      for(let vaccine of this.locationForm.value.vaccinations){
         vaccine.vaccination_name = this.locationForm.value.vaccinations[updateCounter].vaccination_name;
         vaccine.vaccination_date = this.locationForm.value.vaccinations[updateCounter].vaccination_date;
         vaccine.max_participants = this.locationForm.value.vaccinations[updateCounter].max_participants;
-        this.app.updateVaccination(vaccine).subscribe(res => {
-          this.router.navigate(['../../locations', location.postal_code], {
-            relativeTo: this.route
+
+        if(vaccine.id == undefined){
+          vaccine.location_id = this.location.id;
+          this.app.createVaccination(vaccine).subscribe();
+        } else{
+          this.app.updateVaccination(vaccine).subscribe(res => {
+            this.router.navigate(['../../locations', location.postal_code], {
+              relativeTo: this.route
+            });
           });
-        });
-        updateCounter ++;
+
+        } updateCounter ++;
+
       }
       // update Location
       this.app.update(location).subscribe(res => {
